@@ -17,12 +17,29 @@ export default function MovieDashboard() {
     // Form states
     const [newMovieTitle, setNewMovieTitle] = useState('');
     const [newMovieYear, setNewMovieYear] = useState('');
+    const [yearFilter, setYearFilter] = useState('');
     const [ratingInputs, setRatingInputs] = useState<Record<number, number>>({});
 
     const fetchMovies = async () => {
-        // Optimistic or simple re-fetch. Simple re-fetch is safer for consistency.
+        setLoading(true);
         try {
-            const res = await fetch('/api/movies');
+            const query = yearFilter ? `?year=${yearFilter}` : '';
+            const res = await fetch(`/api/movies${query}`);
+            if (res.ok) {
+                const data = await res.json();
+                setMovies(data);
+            }
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const fetchTop5 = async () => {
+        setLoading(true);
+        try {
+            const res = await fetch(`/api/movies/top?limit=5`);
             if (res.ok) {
                 const data = await res.json();
                 setMovies(data);
@@ -36,7 +53,7 @@ export default function MovieDashboard() {
 
     useEffect(() => {
         fetchMovies();
-    }, []);
+    }, [yearFilter]);
 
     const addMovie = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -75,6 +92,8 @@ export default function MovieDashboard() {
                     delete next[movieId];
                     return next;
                 });
+                // decide whether to refresh top 5 or full list? 
+                // defaulting to fetchMovies (current filter) to be safe
                 fetchMovies();
             }
         } catch (err) {
@@ -113,6 +132,26 @@ export default function MovieDashboard() {
                     />
                     <button className="btn" type="submit">Add Movie</button>
                 </form>
+            </section>
+
+            {/* Controls */}
+            <section className="glass-panel" style={{ padding: '1rem', alignItems: 'center' }}>
+                <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                    <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                        <label>Filter by Year:</label>
+                        <input
+                            className="input"
+                            style={{ width: '100px' }}
+                            type="number"
+                            placeholder="All"
+                            value={yearFilter}
+                            onChange={e => setYearFilter(e.target.value)}
+                        />
+                    </div>
+                    <div style={{ flex: 1 }}></div>
+                    <button className="btn btn-secondary" onClick={fetchTop5}>Show Top 5</button>
+                    <button className="btn" onClick={() => { setYearFilter(''); fetchMovies(); }}>Reset</button>
+                </div>
             </section>
 
             {/* Movie List */}

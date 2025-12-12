@@ -6,8 +6,14 @@ type MovieWithRatings = Prisma.MovieGetPayload<{
     include: { ratings: true }
 }>;
 
-export async function GET() {
+export async function GET(request: Request) {
+    const { searchParams } = new URL(request.url);
+    const year = searchParams.get('year');
+
+    const where = year ? { year: parseInt(year) } : {};
+
     const movies = await prisma.movie.findMany({
+        where,
         include: {
             ratings: true,
         },
