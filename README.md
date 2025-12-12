@@ -1,36 +1,36 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Movies Ranking App (Lab04)
 
-## Getting Started
+Aplikacja do rankingu filmów stworzona w **Next.js**, **Prisma (SQLite)** i **TypeScript**.
 
-First, run the development server:
+## Wymagania
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js (wersja 18+ zalecana)
+- npm
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Instalacja i Uruchomienie
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. **Zainstaluj zależności:**
+   ```bash
+   npm install
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. **Przygotuj bazę danych:**
+   Komenda ta stworzy plik bazy danych SQLite (`dev.db`) i zaaplikuje migracje.
+   ```bash
+   npx prisma migrate dev
+   ```
 
-## Learn More
+3. **Uruchom serwer deweloperski:**
+   ```bash
+   npm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. **Otwórz aplikację:**
+   Wejdź na stronę [http://localhost:3000](http://localhost:3000) w przeglądarce.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Funkcjonalności
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Dodawanie filmów**: Formularz do dodania tytułu i roku produkcji.
+- **Ocenianie**: Możliwość ocenienia filmu w skali 1-5.
+- **Ranking**: Lista filmów sortowana automatycznie po średniej ocenie (malejąco).
+- **Czas rzeczywisty**: Zmiany widoczne są natychmiastowo po odświeżeniu listy (re-fetch).
