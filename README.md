@@ -34,3 +34,8 @@ Aplikacja do rankingu filmów stworzona w **Next.js**, **Prisma (SQLite)** i **T
 - **Ocenianie**: Możliwość ocenienia filmu w skali 1-5.
 - **Ranking**: Lista filmów sortowana automatycznie po średniej ocenie (malejąco).
 - **Czas rzeczywisty**: Zmiany widoczne są natychmiastowo po odświeżeniu listy (re-fetch).
+
+## Bonusy (zrealizowane)
+
+- **Filtrowanie po roku**
+- **Top 5 filmów**
