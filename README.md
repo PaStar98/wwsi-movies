@@ -14,18 +14,23 @@ Aplikacja do rankingu filmów stworzona w **Next.js**, **Prisma (SQLite)** i **T
    npm install
    ```
 
-2. **Przygotuj bazę danych:**
+2. **Stwórz plik .env w głównym katalogu i dodaj do niego 
+    ```bash
+    DATABASE_URL="file:./dev.db"
+    ```
+
+3. **Przygotuj bazę danych:**
    Komenda ta stworzy plik bazy danych SQLite (`dev.db`) i zaaplikuje migracje.
    ```bash
    npx prisma migrate dev
    ```
 
-3. **Uruchom serwer deweloperski:**
+4. **Uruchom serwer deweloperski:**
    ```bash
    npm run dev
    ```
 
-4. **Otwórz aplikację:**
+5. **Otwórz aplikację:**
    Wejdź na stronę [http://localhost:3000](http://localhost:3000) w przeglądarce.
 
 ## Funkcjonalności
