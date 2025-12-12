@@ -1,0 +1,14 @@
+-- CreateTable
+CREATE TABLE "Movie" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "title" TEXT NOT NULL,
+    "year" INTEGER NOT NULL
+);
+
+-- CreateTable
+CREATE TABLE "Rating" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "score" INTEGER NOT NULL,
+    "movieId" INTEGER NOT NULL,
+    CONSTRAINT "Rating_movieId_fkey" FOREIGN KEY ("movieId") REFERENCES "Movie" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
